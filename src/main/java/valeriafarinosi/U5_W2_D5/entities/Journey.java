@@ -29,7 +29,7 @@ public class Journey {
     @Enumerated(EnumType.STRING)
     private JOURNEY_STATUS journeyStatus;
 
-    public Journey(String destination, LocalDate journeyDate, JOURNEY_STATUS journeyStatus) {
+    public Journey(String destination, LocalDate journeyDate) {
         this.destination = destination;
         this.journeyDate = journeyDate;
         this.journeyStatus = JOURNEY_STATUS.PROGRAMMED;
