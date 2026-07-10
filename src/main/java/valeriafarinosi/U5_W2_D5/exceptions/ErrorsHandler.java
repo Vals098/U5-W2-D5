@@ -28,6 +28,12 @@ public class ErrorsHandler {
     }
 
     @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorsDTO handleInvalidJourneyStatus(InvalidJourneyStatusException ex) {
+        return new ErrorsDTO(ex.getMessage(), LocalDateTime.now());
+    }
+
+    @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND) //404
     public ErrorsDTO handleNotFound(NotFoundException ex) {
         return new ErrorsDTO(ex.getMessage(), LocalDateTime.now());

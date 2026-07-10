@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import valeriafarinosi.U5_W2_D5.entities.Journey;
 import valeriafarinosi.U5_W2_D5.exceptions.ValidationException;
 import valeriafarinosi.U5_W2_D5.payloads.JourneyResponseDTO;
+import valeriafarinosi.U5_W2_D5.payloads.JourneyUpdateStatusDTO;
 import valeriafarinosi.U5_W2_D5.payloads.NewJourneyDTO;
 import valeriafarinosi.U5_W2_D5.services.JourneyService;
 
@@ -69,6 +70,15 @@ public class JourneyController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable int journeyId) {
         this.journeyService.findByIdAndDelete(journeyId);
+    }
+
+    //    PATCH http://localhost:3003/journeys/{journeyId}/status + payload -> update status of a Journey
+    @PatchMapping("/{journeyId}/status")
+    public JourneyResponseDTO updateJourneyStatus(@PathVariable int journeyId, @RequestBody @Validated JourneyUpdateStatusDTO payload) {
+
+        Journey updated = journeyService.updateStatus(journeyId, payload);
+
+        return new JourneyResponseDTO(updated.getJourneyId());
     }
 
 

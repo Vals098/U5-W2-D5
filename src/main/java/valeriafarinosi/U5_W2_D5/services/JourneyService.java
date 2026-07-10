@@ -4,7 +4,10 @@ package valeriafarinosi.U5_W2_D5.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import valeriafarinosi.U5_W2_D5.entities.Journey;
+import valeriafarinosi.U5_W2_D5.enums.JOURNEY_STATUS;
+import valeriafarinosi.U5_W2_D5.exceptions.InvalidJourneyStatusException;
 import valeriafarinosi.U5_W2_D5.exceptions.NotFoundException;
+import valeriafarinosi.U5_W2_D5.payloads.JourneyUpdateStatusDTO;
 import valeriafarinosi.U5_W2_D5.payloads.NewJourneyDTO;
 import valeriafarinosi.U5_W2_D5.repositories.JourneyRepository;
 
@@ -71,6 +74,28 @@ public class JourneyService {
 
 //         delete
         this.journeyRepository.delete(found);
+
+    }
+
+    //    JOURNEY UPDATE STATUS
+    public Journey updateStatus(int journeyId, JourneyUpdateStatusDTO payload) {
+//        find journey by id
+        Journey found = findById(journeyId);
+
+        JOURNEY_STATUS status;
+
+        try {
+            status = JOURNEY_STATUS.valueOf(payload.journeyStatus().toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            throw new InvalidJourneyStatusException(
+                    "The status must be either PROGRAMMED or COMPLETED."
+            );
+        }
+
+        found.setJourneyStatus(status);
+
+        return journeyRepository.save(found);
+
 
     }
 
