@@ -40,5 +40,11 @@ public class BookingController {
 
     }
 
+    //    GET http://localhost:3003/bookings -> List<Booking>
+    @GetMapping
+    public List<Booking> getAllBookings() {
+        return this.bookingService.getAllBookings();
+    }
+
 
 }

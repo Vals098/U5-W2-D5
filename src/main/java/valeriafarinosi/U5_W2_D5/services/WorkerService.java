@@ -90,20 +90,20 @@ public class WorkerService {
 
     }
 
-    // 6.   UPDATE WORKER PROFILE PIC (AVATAR)
+    //   UPDATE WORKER PROFILE PIC (AVATAR)
     public Worker updateAvatar(int workerId, MultipartFile file) {
-//        1. eventuali controlli tipo file/formato
+//  1. eventuali controlli tipo file/formato
         if (file.isEmpty()) {
             throw new BadRequestException("Please select an image.");
         }
-//    2. findByIdWorker
+//  2. findByIdWorker
         Worker worker = findById(workerId);
-// 3. upload del file du Cloudinary
+//  3. upload del file du Cloudinary
         try {
             Map result = fileUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
             String url = (String) result.get("secure_url");
             System.out.println(url);
-//        4. se tutto va bene, Cloudinary restituirà l'url dell'img
+//  4. se tutto va bene, Cloudinary restituirà l'url dell'img
             worker.setAvatarUrl(url);
 
             return workerRepository.save(worker);

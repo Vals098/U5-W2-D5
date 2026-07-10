@@ -9,6 +9,8 @@ import valeriafarinosi.U5_W2_D5.exceptions.BadRequestException;
 import valeriafarinosi.U5_W2_D5.payloads.NewBookingDTO;
 import valeriafarinosi.U5_W2_D5.repositories.BookingRepository;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class BookingService {
@@ -48,6 +50,11 @@ public class BookingService {
 
         return saved;
 
+    }
+
+    //    FINDALL
+    public List<Booking> getAllBookings() {
+        return this.bookingRepository.findAll();
     }
 
 
