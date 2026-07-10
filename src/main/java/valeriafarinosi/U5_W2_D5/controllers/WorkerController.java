@@ -51,10 +51,25 @@ public class WorkerController {
         return this.workerService.findById(workerId);
     }
 
-//    PUT http://localhost:3003/workers/{workerId} + payload -> updated Worker with workerId
-    
+    //    PUT http://localhost:3003/workers/{workerId} + payload -> updated Worker with workerId
+    @PutMapping("/{workerId}")
+    public Worker findByIdAndUpdate(@PathVariable int workerId, @RequestBody @Validated NewWorkerDTO payload, BindingResult validationResult) {
 
-//    DELETE http://localhost:3003/workers/{workerId} -> delete Worker with workerId
+        if (validationResult.hasErrors()) {
+            List<String> errorsList = validationResult.getFieldErrors().stream().map(fieldError -> fieldError.getDefaultMessage()).toList();
+            throw new ValidationException(errorsList);
+        }
+
+        return this.workerService.findByIdAndUpdate(workerId, payload);
+
+    }
+
+    //    DELETE http://localhost:3003/workers/{workerId} -> delete Worker with workerId
+    @DeleteMapping("/{workerId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void findByIdAndDelete(@PathVariable int workerId) {
+        this.workerService.findByIdAndDelete(workerId);
+    }
 
 
 }
