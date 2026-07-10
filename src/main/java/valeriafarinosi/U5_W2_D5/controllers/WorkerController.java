@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import valeriafarinosi.U5_W2_D5.entities.Worker;
 import valeriafarinosi.U5_W2_D5.exceptions.ValidationException;
 import valeriafarinosi.U5_W2_D5.payloads.NewWorkerDTO;
@@ -64,11 +65,20 @@ public class WorkerController {
 
     }
 
-    //    DELETE http://localhost:3003/workers/{workerId} -> delete Worker with workerId
+    //    DELETE http://localhost:3003/workers/{workerId} -> delete Worker with given workerId
     @DeleteMapping("/{workerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable int workerId) {
         this.workerService.findByIdAndDelete(workerId);
+    }
+
+    //    PATCH http://localhost:3003/workers/{workerId}/avatar -> update pp Worker with given workerId
+    @PatchMapping("/{workerId}/avatar")
+    public void uploadAvatar(
+            @PathVariable int workerId,
+            @RequestParam("avatar") MultipartFile file
+    ) {
+        this.workerService.updateAvatar(workerId, file);
     }
 
 
