@@ -1,6 +1,5 @@
 package valeriafarinosi.U5_W2_D5.services;
 
-import com.cloudinary.Cloudinary;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import valeriafarinosi.U5_W2_D5.entities.Worker;
@@ -19,11 +18,11 @@ public class WorkerService {
     private final WorkerRepository workerRepository;
 
     //    Cloudinary's DI
-    private final Cloudinary fileUploader;
+//    private final Cloudinary fileUploader;
 
-    public WorkerService(WorkerRepository workerRepository, Cloudinary fileUploader) {
+    public WorkerService(WorkerRepository workerRepository) {
         this.workerRepository = workerRepository;
-        this.fileUploader = fileUploader;
+//        this.fileUploader = fileUploader;
     }
 
     //  --------------------------  WORKERS CRUD -----------------------------
