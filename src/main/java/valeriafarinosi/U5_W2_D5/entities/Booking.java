@@ -32,11 +32,11 @@ public class Booking {
     @JoinColumn(name = "worker_id")
     private Worker worker;
 
-    public Booking(Journey journey, Worker worker, LocalDate requestDate, String journeyPreferences) {
-        this.journey = journey;
+    public Booking(Worker worker, Journey journey, String journeyPreferences) {
         this.worker = worker;
-        this.requestDate = requestDate;
+        this.journey = journey;
         this.journeyPreferences = journeyPreferences;
+        this.requestDate = LocalDate.now();
     }
 
     public void setJourneyPreferences(String journeyPreferences) {
