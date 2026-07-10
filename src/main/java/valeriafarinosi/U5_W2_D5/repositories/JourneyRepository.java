@@ -6,4 +6,8 @@ import valeriafarinosi.U5_W2_D5.entities.Journey;
 
 @Repository
 public interface JourneyRepository extends JpaRepository<Journey, Integer> {
+
+    boolean existsByUsername(String username);
+
+    boolean existsByEmail(String email);
 }

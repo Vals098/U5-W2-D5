@@ -6,4 +6,9 @@ import valeriafarinosi.U5_W2_D5.entities.Worker;
 
 @Repository
 public interface WorkerRepository extends JpaRepository<Worker, Integer> {
+
+    boolean existsByUsername(String username);
+
+    boolean existsByEmail(String email);
+
 }
